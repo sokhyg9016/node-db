@@ -1,0 +1,37 @@
+extends login
+
+block content
+    div.sign_up_root_input_container
+        div.sign_up_sub_input_container
+            i#close_btn(style="float:right; padding: 10px; margin: 20px; font-size: 1.5em; cursor:pointer;").fa.fa-times-rectangle
+        
+            div.sign_up_input_container
+                h3(style="text-transform:uppercase")
+                    i.fa.fa-user-plus(style="color:#2f2f2f;") &nbsp;Sign Up
+                br
+                form(action='/auth/join' method = 'post')
+                    div.input_sub_container
+                        label(for="join-email") &nbsp;
+                            i.fas.fa-envelope &nbsp;&nbsp; 
+                            font Email
+                        br
+                        input(type="email" name="email" style= "width: 90%;")
+                    
+                    div.input_sub_container
+                        label(for="join-nick") &nbsp;
+                            i.fas.fa-envelope &nbsp;&nbsp; 
+                            font Nick-name
+                        br
+                        input(type="text" name="nick" style= "width: 90%;")
+                    
+                    div.input_sub_container
+                        label(for="join-password") &nbsp;
+                            i.fa.fa-key &nbsp;&nbsp;
+                            font Password
+                        br
+                        input(type="password" name="password" style= "width: 90%;")
+                    
+                    if joinError
+                        .error-message= joinError
+                    
+                    input(type="submit" value="Sign Up")

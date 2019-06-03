@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket.IO chat</title>
+    <!--[if IE]>
+        <link rel="stylesheet" href="ie_style.css">
+    <![endif]-->
+    <link rel="stylesheet" href="scrollbar.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="discord.css">
+    <link rel="stylesheet" href="code_editor.css">
+    <link rel="stylesheet" href="frame.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.4/ace.js" type="text/javascript" charset="utf-8"></script>
+    <!-- <link rel="stylesheet" href="canvas_bord.css"> -->
+</head>
+<body>
+
+    <ul class="pages">
+
+        <li class="frame page">
+
+            <div class="html_container">
+
+                <div id="display_panel">
+                    <div id = "output_column" class = "pannels"><i class="fas fa-play"></i></div>
+                    <div id = "html_colunm" class = "pannels"><i class="fas fa-code"></i></div>
+                    <!-- <div id = "css_colunm" class = "pannels"><i class="fab fa-css3-alt"></i></div> -->
+                    <!-- <div id = "js_column" class = "pannels"><i class="fab fa-js-square"></i></div> -->
+                </div>
+                
+                <div id="editor_container">
+                    <div id="html_box" class = "box">
+                        <div id="htmleditor"></div>
+                    </div>
+                    <div id="css_box" class = "box">
+                        <div id="csseditor">/*Write CSSCode Here*/</div>
+                    </div>
+                    <div id="js_box" class = "box">
+                        <div id="jseditor">/*Write JS Code Here*/</div>
+                    </div>
+                </div>
+            </div>
+
+            <iframe src="" frameborder="0" id="result"></iframe>
+
+
+            <!-- <div class="window">
+                    <div class="row">
+                        <div class="column left">
+                        <span class="dot" style="background:#ED594A;"></span>
+                        <span class="dot" style="background:#FDD800;"></span>
+                        <span class="dot" style="background:#5AC05A;"></span>
+                        </div>
+                        <div class="column middle">
+                        <input id = "url" type="text" value="https://www.naver.com/">
+                        </div>
+                        <div class="column right">
+                        <div style="float:right">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <iframe name = "web_frame" class="window_content"src="https://m.daum.net/mini" scrolling="no"></iframe>
+            </div> -->
+
+        </li>
+
+
+        <li class="chat page">
+
+            <div class="header">
+                    <div id="toggle_btn">
+                            <div id = "ui" class = "icon"><i class ="fas fa-user"></i></div>
+                            <div id = "ui" class = "icon"><input class = "toggle" type="checkbox"></input></div>
+                            <div id = "ui" class = "icon"><i class="fab fa-discord"></i></div>
+                    </div>
+                    <div id="user_count" class = "icon"><i id = "count" class="fas fa-user">&nbsp;&nbsp;30/30</i></div>
+            </div>
+
+            <div class="chatbox">
+                <ul class="messages"></ul>
+                <div class = "chat_form" action="">
+                    <input class = "inputMessage" autocomplete="off" pattern="[A-Za-z0-9]{1,20}"><button type = "submit" id = "submit">전송</button>
+                </div>
+            </div>
+        </li>
+        <li class="login page">
+            <div class="form"> 
+                <h3 class="title">LOGIN</h3>
+                <br><br>
+                
+                <font>[ID]</font><br><br>
+                <input class="usernameInput" type="text" maxlength="14">
+                <br><br>
+                
+                <font>[PW]</font><br><br>
+                <input class="userpasswdInput" type="password" maxlength="14">
+            </div>
+        </li>
+    </ul>
+
+
+    <!-- <div class="chatbox">
+        <ul class="messages"></ul>
+        <form action="">
+            <input class = "inputMessage" autocomplete="off"><button>전송</button>
+        </form>
+    </div> -->
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <!-- <script src="/canvas.js"></script> -->
+    <script src="/web_compile.js"></script>
+    <script src="/main.js"></script>
+
+    <script>
+            $(document).ready(function()
+            {
+                $('.toggle').click(function(){
+                    $('body').toggleClass('discord');
+                    $('.header').toggleClass('header_discord');
+                    $('.chat_form').toggleClass('chat_form_discord');
+                    $('.log').toggleClass('log_discord');
+                    $('.icon').toggleClass('icon_discord');
+                    $('.messages').toggleClass('messages_discord');
+                });
+            });    
+    </script>
+
+</body>
+</html>

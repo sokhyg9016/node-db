@@ -1,0 +1,78 @@
+
+
+/* width */
+.messages::-webkit-scrollbar
+{
+    width: 10px;
+}
+  
+/* Track */
+.messages::-webkit-scrollbar-track
+{
+    background: inherit;
+}
+
+/* Handle */
+.messages::-webkit-scrollbar-thumb
+{
+    background: #969696;
+    border-radius: 20px;
+}
+
+/* width */
+.frame.page *::-webkit-scrollbar
+{
+    width: 10px;
+}
+  
+/* Track */
+.frame.page *::-webkit-scrollbar-track
+{
+    background: inherit;
+}
+
+/* Handle */
+.frame.page *::-webkit-scrollbar-thumb
+{
+    background: #969696;
+    border-radius: 20px;
+}
+
+
+/* width */
+#result::-webkit-scrollbar
+{
+    width: 10px;
+}
+  
+/* Track */
+#result::-webkit-scrollbar-track
+{
+    background: inherit;
+}
+
+/* Handle */
+#result::-webkit-scrollbar-thumb
+{
+    background: #969696;
+    border-radius: 20px;
+}
+
+/* width */
+div#ace_settingsmenu::-webkit-scrollbar
+{
+    width: 10px;
+}
+  
+/* Track */
+div#ace_settingsmenu::-webkit-scrollbar-track
+{
+    background: inherit;
+}
+
+/* Handle */
+div#ace_settingsmenu::-webkit-scrollbar-thumb
+{
+    background: #969696;
+    border-radius: 20px;
+}

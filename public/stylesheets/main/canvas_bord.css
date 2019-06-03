@@ -1,0 +1,41 @@
+/**
+
+ * Canvas
+
+ */
+
+   /* Page content */
+.window_canvas
+{
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.colors
+{
+    position: fixed;
+    z-index: 999;
+    top:0%;
+    left: 5%;
+}
+  
+.color 
+{
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+}
+  
+  
+.color.black { background-color: black; }
+.color.red { background-color: red; }
+.color.green { background-color: green; }
+.color.blue { background-color: blue; }
+.color.yellow { background-color: yellow; }

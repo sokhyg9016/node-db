@@ -1,0 +1,15 @@
+.messages
+{
+    scrollbar-arrow-color:#9bbbd4;
+    scrollbar-face-color:gray; 
+    scrollbar-track-color:#9bbbd4;
+}
+
+.messages_discord
+{
+    scrollbar-arrow-color: #7289da;
+    scrollbar-face-color:#1e2124;
+    scrollbar-track-color:#2e3136; 
+    scrollbar-highlight-color: #1e2124;
+    scrollbar-width: 5px;
+}

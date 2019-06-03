@@ -1,0 +1,367 @@
+link(rel="stylesheet", href="/stylesheets/main/style.css")
+link(rel="stylesheet", href="/stylesheets/main/discord.css")
+link(rel="stylesheet", href="/stylesheets/main/frame.css")
+link(rel="stylesheet", href="/stylesheets/main/scrollbar.css")
+link(rel="stylesheet", href="/stylesheets/main/code_editor.css")
+link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous")
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.4/ace.js" type="text/javascript" charset="utf-8")
+ul.pages
+    li.frame.page
+        div.html_container
+            div#display_panel
+                div#output_column.pannels
+                    i.fas.fa-play
+                div#html_colunm.pannels
+                    i.fas.fa-code
+    
+            div#editor_container
+                div#html_box.box
+                    div#htmleditor
+                //- div#css_box.box
+                //-     div#csseditor /*Write CSSCode Here*/
+                //- div#js_box.box
+                //-     div#jseditor /*Write JS Code Here*/
+
+        iframe#result(src="" frameborder="0")
+
+    li.chat.page
+        div.header
+            div#toggle_btn
+                div#ui.icon
+                    i.fas.fa-user
+                div#ui.icon
+                    input.toggle(type="checkbox")
+                div#ui.icon
+                    i.fab.fa-discord
+            div#user_count.icon
+                font= title
+                    i#count.fas.fa-user
+                        font#ID= user
+                a#exit-btn(href='/main') 방 나가기
+
+        div.chatbox    
+            ul.messages
+            div#chat-list
+            div.chat_form
+                input.inputMessage(autocomplete="off" pattern="[A-Za-z0-9]{1,20}")
+                button#submit(type = "submit") 전송
+    
+script(src='/socket.io/socket.io.js')
+script(src="http://code.jquery.com/jquery-1.11.1.js")
+script(src="/javascripts/main/web_compile.js")
+//- script(src="/javascripts/chat/main.js")
+script.
+
+    $(document).ready(function()
+    {
+        $('.toggle').click(function(){
+            $('body').toggleClass('discord');
+            $('.header').toggleClass('header_discord');
+            $('.chat_form').toggleClass('chat_form_discord');
+            $('.log').toggleClass('log_discord');
+            $('.icon').toggleClass('icon_discord');
+            $('.messages').toggleClass('messages_discord');
+        });
+    }); 
+    $(function()
+    {
+        var ID = $('#ID').val();
+        var socket = io.connect('http://localhost:8001/main/chat', 
+        {
+            path: '/socket.io'
+        });
+
+        var COLORS = 
+        [
+            '#e21400', '#91580f', '#f8a700', '#f78b00', 
+            '#58dc00', '#287b00', '#a8f07a', '#4ae8c4', 
+            '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+        ];
+
+
+
+        socket.on('join', function (data) 
+        {
+            var $joinLog = $('<li class = "log">').text(data.chat);
+            addMessageElement($joinLog);
+        });
+
+        socket.on('exit', function (data) 
+        {
+            var $joinLog = $('<li class = "log">').text(data.chat);
+            addMessageElement($joinLog);
+        });
+
+        var $messages = $('.messages');
+        var $inputMessage = $('.inputMessage');
+
+        var theme_staus = 1;
+
+        var $window = $(window);
+
+        $window.keydown(function(event)
+        {
+            var value = $inputMessage.val();
+
+            if(event.which === 13)
+            {
+                if(value != '')
+                {
+                    socket.emit('chat message', $inputMessage.val());
+                    $inputMessage.val('');
+                }
+            }
+        });
+
+        $('#submit').click(function()
+        {
+            if( $inputMessage.val() != '')
+            {
+                socket.emit('chat message',$inputMessage.val());
+                $inputMessage.val('');
+                return false;
+            }
+        });
+
+        /*유저 닉네임마다 색깔을 지정*/
+        function getUsernameColor(username)
+        {
+            var index = 0;
+
+            for(var i = 0; i < username.length; i++)
+            {
+                index += username.charCodeAt(i);
+            }
+            index = Math.abs(index % COLORS.length);
+            return COLORS[index];
+        }
+
+
+        function addMessageElement(el)
+        {
+            $messages.append(el);
+        }
+
+        socket.on('my message', function(data)
+        {  
+            var time =  myFunction();
+
+            /*chatting log components*/ 
+            var $usernameSpan = $('<span class = "username"/>');
+            var $messageBodySpan = $('<span class = "messageBody"/>');
+            var $timeLog = $('<span id = "time"/>');
+            var $user_icon = $('<i class="fas fa-user"/>');
+            var $message = $('<li class = "message"/>');
+
+            $user_icon
+            .css
+            ({
+                "float":"left",
+                "color": getUsernameColor($('#ID').text()),
+                "text-align" : "left",
+                "padding" : "5px 8px 5px 2px",
+                "margin-left" : "17px",
+                "font-weight" : "bold",
+                "font-size" : "1.2em"
+            })
+
+            $usernameSpan
+            .css
+            ({
+                "float":"left",
+                "color": getUsernameColor($('#ID').text()),
+                "text-align" : "left",
+                "font-weight" : "bold",
+                "font-size" : "1.2em",
+                "margin-top" : "4px"
+            })
+            .text($('#ID').text());
+
+            $timeLog
+            .css
+            ({ 
+                "float" : "left",
+                "background" : "none",
+                "text-align" : "left",
+                "font-size" : "0.8em",
+                "margin-top" : "8px",
+                "margin-left" : "3px",
+                "color" : "#b9bbbe"
+            })
+            .text("[" + time + "]");
+
+            $messageBodySpan
+            .css
+            ({
+                "clear" : "both",
+                "float" : "left",
+                "max-width" : "65%",
+                "display" : "block",
+                "color" : "#fff",
+                "background" : "none",
+                "text-align" : "left",
+                "margin": "0px 0px 3px 18px",
+                "padding" : "5px 0px 5px 0px",
+                "border-radius" : "5px", 
+                "word-wrap" : "break-word",
+                "font-size" : "1.2em"
+            })
+            .text(data.message);
+
+            $message.append($user_icon, $usernameSpan, $timeLog, $messageBodySpan);
+            addMessageElement($message);
+        });
+        
+
+        socket.on('chat message', function(data)
+        {
+            
+            /*chatting log components*/ 
+            var $usernameSpan = $('<span class = "username"/>');
+            var $messageBodySpan = $('<span class = "messageBody"/>');
+            var $timeLog = $('<span id = "time"/>');
+            var $user_icon = $('<i class="fas fa-user"/>');
+            var $message = $('<li class = "message"/>');
+            var time =  myFunction();
+
+            if(theme_staus == 1)
+            {
+                $usernameSpan
+                .css
+                ({
+                    "display":"block",
+                    "color": getUsernameColor(data.username),
+                    "text-align" : "left",
+                    "padding" : "5px 8px 5px 8px",
+                    "font-weight" : "bold",
+                    "margin-left" : "5px"
+                })
+                .text(data.username);
+
+                $messageBodySpan
+                .css
+                ({
+                    "float" : "left",
+                    "max-width" : "60%",
+                    "color": "#000", 
+                    "background" : "#fff",
+                    "text-align" : "left",
+                    "padding" : "5px 8px 5px 8px", 
+                    "border-radius" : "5px", 
+                    "margin-bottom": "3px",
+                    "margin-left" : "5px",
+                    "word-wrap" : "break-word",
+                    "box-shadow" : "0 3px 4px -4px #556677",
+                    "font-size" : "1.2em"
+                })
+                .text(data.message);
+
+                $timeLog
+                .css
+                ({
+                    "float" : "left",
+                    "color": "#556677;",
+                    "background" : "none",
+                    "text-align" : "left",
+                    "font-size" : "0.8em",
+                    "padding-top" : "10px", 
+                    "padding-left": "5px"
+                })
+                .text(time);
+
+                $message.append($usernameSpan, $messageBodySpan, $timeLog);
+            }
+            else if(theme_staus == -1)
+            {
+                $usernameSpan
+                .css
+                ({
+                    "float":"left",
+                    "color": getUsernameColor(data.username),
+                    "text-align" : "left",
+                    "margin-left" : "17px",
+                    "font-weight" : "bold",
+                    "font-size" : "1.2em"
+                })
+                .text(data.username);
+
+                $timeLog
+                .css
+                ({ 
+                    "float" : "left",
+                    "background" : "none",
+                    "text-align" : "left",
+                    "font-size" : "0.8em",
+                    "margin-top" : "5px",
+                    "margin-left" : "3px",
+                    "color" : "#b9bbbe"
+                })
+                .text("[" + time + "]");
+
+                $messageBodySpan
+                .css
+                ({
+                    "clear" : "both",
+                    "float" : "left",
+                    "max-width" : "65%",
+                    "display" : "block",
+                    "color" : "#fff",
+                    "background" : "none",
+                    "text-align" : "left",
+                    "margin": "0px 0px 3px 18px",
+                    "padding" : "5px 0px 5px 0px",
+                    "border-radius" : "5px", 
+                    "word-wrap" : "break-word",
+                    "font-size" : "1.2em"
+                })
+                .text(data.message);
+
+                $message.append($usernameSpan, $timeLog, $messageBodySpan);
+            }
+            
+            addMessageElement($message);
+        });
+
+        function addZero(i) 
+        {
+            if (i < 10) {
+            i = "0" + i;
+            }
+            return i;
+        }
+            
+        function myFunction() 
+        {
+            var d = new Date();
+            var nowHour = d.getHours();
+            var str;
+            var h = addZero(d.getHours());
+            var m = addZero(d.getMinutes());
+            // var s = addZero(d.getSeconds());
+
+            if ( nowHour <= 12  &&  nowHour  >= 6 ) 
+            {
+                str = "오전" + h + ":" + m;
+            }
+            else if (  nowHour >= 12  &&  nowHour  < 22  ) 
+            {
+                str = "오후" + (h-12) + ":" + m;
+            } 
+            else if ( nowHour >= 22  &&  nowHour  <= 24  )
+            {
+                if(nowHour == 24)
+                h -= 24;
+                
+                str = "오후" + h + ":" + m;
+            } 
+            else 
+            {
+                str = "오전" + h + ":" + m;
+            }
+            return str;
+        }
+
+        socket.emit('test', {});
+    });
+

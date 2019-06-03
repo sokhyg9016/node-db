@@ -1,0 +1,173 @@
+.html_container
+{
+    height: 95%;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    top: 5%;
+    color: #fff;
+    overflow: hidden;
+}
+
+.box
+{
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+#editor_container
+{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    overflow: auto;
+}
+
+#html_box
+{
+    display:none;
+    float: left;
+    height: 100%;
+    max-width:100%;
+    max-height: 100vh;
+    width: 100%;
+}
+
+#htmleditor
+{
+    float: left;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+}
+
+#css_box
+{
+    display:none;
+    float: left;
+    height: 100%;
+    max-width:100%;
+    max-height: 60vh;
+    width: 100%;
+}
+
+#csseditor
+{
+    float: left;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+}
+
+div#dragbar_2
+{
+    float: left;
+    width: 2px;
+    height: 100%;
+    max-height: 60vh;
+    cursor: col-resize;
+    background-color:#4a4c51;
+}
+
+#js_box
+{
+    display:none;
+    float: left;
+    height: 100%;
+    max-width:100%;
+    max-height: 60vh;
+    width: 100%;
+}
+
+#jseditor
+{
+    float: left;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+}
+
+div#dragbar_3
+{
+    float: left;
+    width: 2px;
+    height: 100%;
+    max-height: 60vh;
+    cursor: col-resize;
+    background-color:#4a4c51;
+}
+
+#smyles_dragbar {
+	background-color: #222222;
+	width: 100%;
+	height: 2px;
+	cursor: row-resize;
+	opacity: 1;
+}
+
+#result
+{
+    display:none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background: #fff;
+    border-top: 1px solid #4a4c51;
+    overflow-x: hidden;
+    z-index: 999;
+}
+
+#display_panel
+{
+    position: absolute;
+    top:0%;
+    right: 0%;
+    z-index: 999;
+    padding: 10px;
+    color: #b9bbbe;
+}
+
+.pannels
+{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    /* border: 1px solid red; */
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+
+/* Setting Menu CSS */
+div#ace_settingsmenu
+{
+    background: #1e2124;
+    color :#b9bbbe;
+}
+
+table#controls tr
+{
+    line-height: 30px;
+}
+
+table#controls tr td select
+{
+    background: #1e2124;
+    color :#fff;
+    border:1px solid #b9bbbe;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
+select#-mode
+{
+    background: #1e2124;
+    color :#fff;
+    border:1px solid #b9bbbe;
+    border-radius: 5px;
+    padding: 3px 5px;
+}

@@ -1,0 +1,118 @@
+
+body.discord
+{
+    background:	#1e2124;
+    color: #fff;
+}
+
+.header_discord
+{
+    width: 100%;
+    position: fixed;
+    top:0%;
+    left:0%;
+    background:#2e3136;    
+    z-index: 999;
+    border-bottom: 1px solid #4a4c51;
+}
+
+.chat_form_discord
+{
+    background: #4a4c51;
+    padding: 5px 3px; 
+    position: fixed; 
+    bottom: 0; 
+    width: 30%;
+    color:#fff;
+}
+
+.chat_form_discord input 
+{
+    border: 0;
+    background: #1e2124;
+    padding: 10px; 
+    width: 80%; 
+    margin-right: .5%; 
+    border-radius: 5px;
+    color: #fff;
+}
+
+.chat_form_discord button 
+{ 
+    width: 18%; 
+    background: #7289da;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 10px;
+    margin: 1px;
+    color: #fff;
+}
+
+.log_discord
+{
+    color: #b9bbbe;
+    font-size: 50%;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.icon_discord
+{
+    color: #b9bbbe;
+}
+
+.messages_discord::-webkit-scrollbar
+{
+    width: 10px;
+}
+  
+/* Track */
+.messages_discord::-webkit-scrollbar-track
+{
+    background: #1e2124;
+}
+
+/* Handle */
+.messages_discord::-webkit-scrollbar-thumb
+{
+    background: #5a5f69;  
+    border-radius: 20px;
+}
+
+/* .messageBody_discord
+{
+    float : right;
+    max-width : 60%;
+    color :#fff;
+    background: inherit;
+    text-align:  right;
+    margin: 0px 5px 3px 0px;
+    padding : 5px 8px 5px 8px;
+    margin-bottom : 3px;
+    word-wrap : break-word;
+    font-size : 1.2em;
+} */
+
+@media(max-width: 500px)
+{
+    .chatbox
+    {
+        margin-top:10%;
+    }
+    .chat_form_discord
+    {
+        width: 100%;
+    }
+    .chat_form_discord input 
+    {
+        border: 0; 
+        padding: 10px; 
+        width: 78%; 
+        margin-right: .5%; 
+    }
+    .chat_form_discord button  
+    {
+        width: 19%; 
+        padding: 8px 10px;
+    }
+}
